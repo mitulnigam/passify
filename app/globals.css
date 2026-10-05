@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #020817;
+  --foreground: #f8fafc;
+  --neon-pink: #ff2d78;
+  --neon-cyan: #00f5ff;
+  --neon-purple: #bf00ff;
+  --neon-yellow: #ffe600;
+  --neon-green: #39ff14;
 }
 
 @theme inline {
@@ -12,15 +17,265 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ────────────────────────────────────────────
+   3D Text Effects
+──────────────────────────────────────────── */
+.text-3d {
+  text-shadow:
+    0 1px 0 #ccc,
+    0 2px 0 #c9c9c9,
+    0 3px 0 #bbb,
+    0 4px 0 #b9b9b9,
+    0 5px 0 #aaa,
+    0 6px 1px rgba(0,0,0,.1),
+    0 0 5px rgba(0,0,0,.1),
+    0 1px 3px rgba(0,0,0,.3),
+    0 3px 5px rgba(0,0,0,.2),
+    0 5px 10px rgba(0,0,0,.25),
+    0 10px 10px rgba(0,0,0,.2),
+    0 20px 20px rgba(0,0,0,.15);
+}
+
+.text-neon-pink {
+  color: #fff;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px var(--neon-pink),
+    0 0 82px var(--neon-pink),
+    0 0 92px var(--neon-pink),
+    0 0 102px var(--neon-pink),
+    0 0 151px var(--neon-pink);
+}
+
+.text-neon-cyan {
+  color: #fff;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px var(--neon-cyan),
+    0 0 82px var(--neon-cyan),
+    0 0 92px var(--neon-cyan);
+}
+
+.text-neon-purple {
+  color: #e8b4ff;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #e8b4ff,
+    0 0 21px #e8b4ff,
+    0 0 42px var(--neon-purple),
+    0 0 82px var(--neon-purple);
+}
+
+/* ────────────────────────────────────────────
+   3D Card Perspective
+──────────────────────────────────────────── */
+.perspective-container {
+  perspective: 1000px;
+}
+
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+  will-change: transform;
+}
+
+.card-3d:hover {
+  box-shadow:
+    0 25px 50px rgba(0,0,0,0.6),
+    0 0 30px rgba(255,45,120,0.3),
+    0 0 60px rgba(0,245,255,0.15);
+}
+
+/* ────────────────────────────────────────────
+   Neon Border Glow
+──────────────────────────────────────────── */
+.neon-border-pink {
+  border-color: var(--neon-pink);
+  box-shadow:
+    0 0 5px var(--neon-pink),
+    0 0 20px var(--neon-pink),
+    inset 0 0 5px rgba(255,45,120,0.1);
+}
+
+.neon-border-cyan {
+  border-color: var(--neon-cyan);
+  box-shadow:
+    0 0 5px var(--neon-cyan),
+    0 0 20px var(--neon-cyan),
+    inset 0 0 5px rgba(0,245,255,0.1);
+}
+
+.neon-border-purple {
+  border-color: var(--neon-purple);
+  box-shadow:
+    0 0 5px var(--neon-purple),
+    0 0 20px var(--neon-purple),
+    inset 0 0 5px rgba(191,0,255,0.1);
+}
+
+/* ────────────────────────────────────────────
+   Arcade scanline overlay
+──────────────────────────────────────────── */
+.scanlines::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.07) 2px,
+    rgba(0, 0, 0, 0.07) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ────────────────────────────────────────────
+   Pixel font-like heading
+──────────────────────────────────────────── */
+.font-pixel {
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 0.05em;
+}
+
+/* ────────────────────────────────────────────
+   Floating animation
+──────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes pulse-neon {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes glitch {
+  0%   { transform: translate(0);         clip-path: polygon(0 0,100% 0,100% 35%,0 35%); }
+  20%  { transform: translate(-4px, 2px); clip-path: polygon(0 20%,100% 20%,100% 60%,0 60%); }
+  40%  { transform: translate(4px, -2px); clip-path: polygon(0 50%,100% 50%,100% 80%,0 80%); }
+  60%  { transform: translate(-2px, 1px); clip-path: polygon(0 70%,100% 70%,100% 90%,0 90%); }
+  80%  { transform: translate(2px, -1px); clip-path: polygon(0 10%,100% 10%,100% 40%,0 40%); }
+  100% { transform: translate(0);         clip-path: polygon(0 0,100% 0,100% 35%,0 35%); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-neon {
+  animation: pulse-neon 2s ease-in-out infinite;
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    #ff2d78 0%,
+    #bf00ff 25%,
+    #00f5ff 50%,
+    #ffe600 75%,
+    #ff2d78 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ────────────────────────────────────────────
+   Glitch effect layers (title)
+──────────────────────────────────────────── */
+.glitch-container {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+.glitch-container:hover .glitch-layer {
+  opacity: 0.6;
+  animation: glitch 0.4s steps(2) 1;
+}
+.glitch-layer-1 { color: var(--neon-cyan);  left:  2px; }
+.glitch-layer-2 { color: var(--neon-pink);  left: -2px; }
+
+/* ────────────────────────────────────────────
+   Neon button
+──────────────────────────────────────────── */
+.btn-neon {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-neon::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+  background-size: 300% 100%;
+  animation: shimmer 2s linear infinite;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.btn-neon:hover::before { opacity: 1; }
+
+.btn-neon:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 25px rgba(255,45,120,0.6), 0 0 50px rgba(0,245,255,0.3);
+}
+
+/* ────────────────────────────────────────────
+   Pixel stars background particles
+──────────────────────────────────────────── */
+.pixel-star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  opacity: 0;
+  animation: twinkle var(--dur, 2s) ease-in-out infinite var(--delay, 0s);
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50%       { opacity: 1; transform: scale(1.2); }
 }

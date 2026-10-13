@@ -148,15 +148,16 @@ export default function PersonalPage() {
             >
               ← Back
             </Link>
-            <button
-              className="btn-neon rounded-full px-6 py-3 text-sm font-bold text-white font-pixel"
+            <a
+              href="/login/personal"
+              className="btn-neon rounded-full px-6 py-3 text-sm font-bold text-white font-pixel flex items-center justify-center"
               style={{
                 background: "linear-gradient(90deg, #ff2d78, #bf00ff)",
                 boxShadow: "0 0 20px rgba(255,45,120,0.6)",
               }}
             >
               Continue to builder →
-            </button>
+            </a>
           </div>
         </TiltCard>
       </div>

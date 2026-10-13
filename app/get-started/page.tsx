@@ -13,10 +13,12 @@ function TiltCard({
   children,
   className = "",
   glowColor = "rgba(255,45,120,0.4)",
+  style,
 }: {
   children: React.ReactNode;
   className?: string;
   glowColor?: string;
+  style?: React.CSSProperties;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -48,6 +50,7 @@ function TiltCard({
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className={`card-3d ${className}`}
+        style={style}
       >
         {children}
       </div>

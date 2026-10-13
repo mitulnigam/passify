@@ -147,15 +147,16 @@ export default function OrganizationPage() {
             >
               ← Back
             </Link>
-            <button
-              className="btn-neon rounded-full px-6 py-3 text-sm font-bold text-white font-pixel"
+            <a
+              href="/login/organization"
+              className="btn-neon rounded-full px-6 py-3 text-sm font-bold text-white font-pixel flex items-center justify-center"
               style={{
                 background: "linear-gradient(90deg, #00f5ff, #0066ff)",
                 boxShadow: "0 0 20px rgba(0,245,255,0.6)",
               }}
             >
               Start organization setup →
-            </button>
+            </a>
           </div>
         </TiltCard>
       </div>

@@ -42,6 +42,8 @@ Thumbs.db
 *.ntvs*
 *.njsproj
 *.sln
+~$*
+*.tmp
 
 # ── Vercel ───────────────────────────────────
 .vercel

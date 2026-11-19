@@ -113,6 +113,16 @@ export function WorkspaceAuthForm({ mode, action, signedIn = false }: WorkspaceA
                 style={{ borderColor: `${config.accent}50` }}
                 placeholder="••••••••"
               />
+              {action === "login" && (
+                <div className="flex justify-end pt-1">
+                  <Link
+                    href={`/auth/forgot-password?workspace=${mode}`}
+                    className="text-xs font-pixel text-slate-400 hover:text-white transition"
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
+              )}
             </div>
             </>}
             {signedIn && <p className="text-center text-sm text-slate-300">You are signed in. Continue to create your {config.label.toLowerCase()} workspace.</p>}
@@ -131,7 +141,7 @@ export function WorkspaceAuthForm({ mode, action, signedIn = false }: WorkspaceA
             )}
             {state?.message && <p role="status" className="text-center text-sm text-cyan-200">{state.message}</p>}
           </form>
-          {action === "login" && <Link href={`/auth/forgot-password?workspace=${mode}`} className="mt-5 block text-center text-sm text-slate-300 underline">Forgot password?</Link>}
+          
 
           <div className="mt-8 text-center text-sm text-slate-400 font-pixel">
             {action === "login" ? "New user? " : "Already registered? "}
